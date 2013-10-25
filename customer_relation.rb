@@ -56,6 +56,7 @@ class CRM
   
   def change_contact
     puts "Which contact do you want to change: "
+    Rolodex.modify_contact
     
   end
 
@@ -98,7 +99,42 @@ class Rolodex #just for dev
 
 
   def self.modify_contact
-
+    customer_input = gets.chomp
+    @contacts.each do |contact|
+      if customer_input == contact.first_name || contact.last_name || contact.e_mail || contact.notes
+          puts "#{contact.first_name} #{contact.last_name}"
+          puts "#{contact.e_mail}"
+          puts "#{contact.notes}"
+      else
+        puts "That contact doesn't exist"
+      end
+      end
+      puts "Is this the contact you want to edit Y/N?"
+      answer = gets.chomp
+      if answer = "Y".capitalize
+      else
+      main_menu
+      end
+    @contacts.each do |contact|
+      if customer_input == contact.first_name || contact.last_name || contact.e_mail || contact.notes
+        @contacts.delete(contact)
+      end
+      self.updating_contact
+    end
+    
+  end
+  
+  def self.updating_contact
+    print "What is your first name: "
+    first_name = gets.chomp
+    print "What is your last name: "
+    last_name = gets.chomp
+    print "What is your e-mail address: "
+    e_mail = gets.chomp
+    print "Add a note: "
+    notes = gets.chomp
+    contact = Contact.new(first_name, last_name, e_mail, notes)
+    Rolodex.adding_contact(contact)
   end
 
   def self.display_all_contact
