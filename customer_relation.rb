@@ -73,7 +73,7 @@ class CRM
 
   def delete
     print "Which contact do you want to delete: "
-
+    Rolodex.delete_contact
   end
 
 end
@@ -98,6 +98,7 @@ class Rolodex #just for dev
 
 
   def self.modify_contact
+
   end
 
   def self.display_all_contact
@@ -134,8 +135,20 @@ class Rolodex #just for dev
   
 
   def self.delete_contact
+    customer_input = gets.chomp
+    @contacts.each do |contact|
+      if customer_input == contact.first_name || contact.last_name || contact.e_mail || contact.notes
+          puts "#{contact.first_name} #{contact.last_name}"
+          puts "#{contact.e_mail}"
+          puts "#{contact.notes}"
+            @contacts.delete(contact)
+              puts "Contact deleted"
+      else
+        puts "That name doesn't exist!"
+      end
+    end
+  
   end
-    
 end
 
 
@@ -153,5 +166,4 @@ end
 
 my_crm = CRM.new("my CRM")
 my_crm.main_menu
-test = Contact.new("Gowri", "Namb", "ksjfa@blah", "note")
 
