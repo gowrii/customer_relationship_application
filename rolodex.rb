@@ -67,14 +67,8 @@ class Rolodex #just for dev
   def self.display_info_by_attribute # else statement shows up twice, at beginning and end
     customer_input = gets.chomp
     case customer_input
-      when
-        @contacts.each {|contact| puts contact.display_values if customer_input == contact.first_name}
-      when
-        @contacts.each {|contact| puts contact.display_values if customer_input == contact.last_name}
-      when 
-        @contacts.each {|contact| puts contact.display_values if customer_input == contact.e_mail}
-      when 
-        @contacts.each {|contact| puts contact.display_values if customer_input == contact.notes}
+    when 
+      @contacts.each { |contact| puts contact.display_values if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
       else 
         puts "no matches found"
     end
@@ -85,14 +79,12 @@ class Rolodex #just for dev
     customer_input = gets.chomp
     case customer_input
     when 
-      @contacts.each { |contact|
-       customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)
-          puts contact.display_values
-            @contacts.delete(contact)
-              puts "Contact deleted"
+      @contacts.each { |contact| puts contact.display_values if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
+      @contacts.delete(contact)
+      puts "Contact deleted"
       else
         puts "That name doesn't exist!"
-      end
+      
     end
   
   end
