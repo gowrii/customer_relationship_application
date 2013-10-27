@@ -70,23 +70,18 @@ class Rolodex #just for dev
     when 
       @contacts.each { |contact| puts contact.display_values if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
       else 
-        puts "no matches found"
+        puts "Sorry no matches found!"
     end
   end
   
 
   def self.delete_contact
     customer_input = gets.chomp
-    case customer_input
-    when 
-      @contacts.each { |contact| puts contact.display_values if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
-      @contacts.delete(contact)
-      puts "Contact deleted"
-      else
-        puts "That name doesn't exist!"
-      
-    end
-  
+      @contacts.each do |contact| @contacts.delete(contact) if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)
+      puts "Your contact #{contact.first_name} #{contact.last_name} has been deleted"
+      puts "Returning to main menu"
+      puts " "
+      end
   end
 end
 

@@ -8,9 +8,11 @@ class Contact
     @notes = notes
   end
   def display_values
+  	  puts " "
   	  puts "#{@first_name} #{@last_name}"
       puts "#{@e_mail}"
       puts "#{@notes}"
+      puts " "
       puts "-------------------------------------------"
   end
 end
