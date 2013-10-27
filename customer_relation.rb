@@ -1,7 +1,11 @@
+require_relative "contact"
+require_relative "rolodex"
+
 class CRM
   attr_accessor :name, :email, :first_name, :last_name, :notes
   def initialize(name)
     self.name= name
+    
   end
 
  def main_menu
@@ -17,10 +21,11 @@ class CRM
     puts "[1] Add a new contact"
     puts "[2] Change a contact"
     puts "[3] Display all contacts"
-    puts "[4] Display attributes"
+    puts "[4] Search using attributes"
     puts "[5] Delete contact"
     puts "[6] Thanks alot bye!"
-    puts "Enter a number"
+    print "Enter a number: "
+    
   end
 
   def choices_on_menu (choices)
@@ -49,13 +54,13 @@ class CRM
     e_mail = gets.chomp
     print "Add a note: "
     notes = gets.chomp
+    puts "-------------------------------------------"
     contact = Contact.new(first_name, last_name, e_mail, notes)
       Rolodex.adding_contact(contact)
-      
       end
   
   def change_contact
-    puts "Which contact do you want to change: "
+    print "Which contact do you want to change: "
     Rolodex.modify_contact
     
   end
@@ -66,8 +71,7 @@ class CRM
   end
 
   def display_attributes
-    puts "Type in a search for your contact: "
-    
+    print "Type in a search for your contact: " 
     Rolodex.display_info_by_attribute 
   end
 
@@ -79,127 +83,6 @@ class CRM
 
 end
 
-class Rolodex #just for dev
-
-  @contacts = []
-  @id = 1000
-
-  def self.adding_contact(contact)
-    contact.id = @id
-    @contacts << contact
-    @id += 1
-  end
-  def self.contacts
-  @contacts 
-  end 
-
-  def self.contacts=(contacts)
-    @contacts = contacts
-  end
-
-
-  def self.modify_contact
-    customer_input = gets.chomp
-    @contacts.each do |contact|
-      if customer_input == contact.first_name || contact.last_name || contact.e_mail || contact.notes
-          puts "#{contact.first_name} #{contact.last_name}"
-          puts "#{contact.e_mail}"
-          puts "#{contact.notes}"
-      else
-        puts "That contact doesn't exist"
-      end
-      end
-      puts "Is this the contact you want to edit Y/N?"
-      answer = gets.chomp
-      if answer = "Y".capitalize
-      else
-      main_menu
-      end
-    @contacts.each do |contact|
-      if customer_input == contact.first_name || contact.last_name || contact.e_mail || contact.notes
-        @contacts.delete(contact)
-      end
-      self.updating_contact
-    end
-    
-  end
-  
-  def self.updating_contact
-    print "What is your first name: "
-    first_name = gets.chomp
-    print "What is your last name: "
-    last_name = gets.chomp
-    print "What is your e-mail address: "
-    e_mail = gets.chomp
-    print "Add a note: "
-    notes = gets.chomp
-    contact = Contact.new(first_name, last_name, e_mail, notes)
-    Rolodex.adding_contact(contact)
-  end
-
-  def self.display_all_contact
-      @contacts.each do |contact| 
-      puts "#{contact.first_name} #{contact.last_name}"
-      puts "#{contact.e_mail}"
-      puts "#{contact.notes}"
-    end
-  end
-
-  def self.display_info_by_attribute
-    customer_input = gets.chomp
-    @contacts.each do |contact|
-      if contact.first_name == customer_input
-        puts "#{contact.first_name} #{contact.last_name}"
-        puts "#{contact.e_mail}"
-        puts "#{contact.notes}"
-      elsif contact.last_name == customer_input
-        puts "#{contact.first_name} #{contact.last_name}"
-        puts "#{contact.e_mail}"
-        puts "#{contact.notes}"
-      elsif contact.e_mail == customer_input
-        puts "#{contact.first_name} #{contact.last_name}"
-        puts "#{contact.e_mail}"
-        puts "#{contact.notes}"
-      elsif contact.notes == customer_input
-        puts "#{contact.first_name} #{contact.last_name}"
-        puts "#{contact.e_mail}"
-        puts "#{contact.notes}"
-      else puts "That contact does not exist"
-      end
-    end
-  end
-  
-
-  def self.delete_contact
-    customer_input = gets.chomp
-    @contacts.each do |contact|
-      if customer_input == contact.first_name || contact.last_name || contact.e_mail || contact.notes
-          puts "#{contact.first_name} #{contact.last_name}"
-          puts "#{contact.e_mail}"
-          puts "#{contact.notes}"
-            @contacts.delete(contact)
-              puts "Contact deleted"
-      else
-        puts "That name doesn't exist!"
-      end
-    end
-  
-  end
-end
-
-
-class Contact
-  attr_accessor :first_name, :last_name, :e_mail, :notes, :id
-  def initialize (first_name, last_name, e_mail, notes)
-    @first_name = first_name
-    @last_name = last_name
-    @e_mail = e_mail
-    @notes = notes
-  end
-  def display_values
-  end
-end
 
 my_crm = CRM.new("my CRM")
 my_crm.main_menu
-
