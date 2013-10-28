@@ -23,7 +23,7 @@ class CRM
     puts "[3] Display all contacts"
     puts "[4] Search using attributes"
     puts "[5] Delete contact"
-    puts "[6] Thanks alot bye!"
+    puts "[6] Exit? Thanks alot bye!"
     print "Enter a number: "
     
   end
@@ -47,13 +47,13 @@ class CRM
 
   def add_contact
     print "What is your first name: "
-    first_name = gets.chomp
+    first_name = gets.chomp.capitalize
     print "What is your last name: "
-    last_name = gets.chomp
+    last_name = gets.chomp.capitalize
     print "What is your e-mail address: "
-    e_mail = gets.chomp
+    e_mail = gets.chomp.downcase
     print "Add a note: "
-    notes = gets.chomp
+    notes = gets.chomp.downcase
     puts "-------------------------------------------"
     contact = Contact.new(first_name, last_name, e_mail, notes)
       Rolodex.adding_contact(contact)

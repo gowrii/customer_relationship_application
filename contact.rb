@@ -9,8 +9,8 @@ class Contact
   end
   def display_values
   	  puts " "
-  	  puts "#{@first_name} #{@last_name}"
-      puts "#{@e_mail}"
+  	  puts "#{@first_name.capitalize} #{@last_name.capitalize}"
+      puts "#{@e_mail.downcase}"
       puts "#{@notes}"
       puts " "
       puts "-------------------------------------------"

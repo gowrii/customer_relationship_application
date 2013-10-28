@@ -19,17 +19,13 @@ class Rolodex #just for dev
     @contacts = contacts
   end
 
-
-
-
-
   def self.modify_contact
-  customer_input = gets.chomp
-  @contacts.each { |contact| puts contact.display_values if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
-  @contacts.each {|contact| @contacts.delete(contact) if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
-  #puts "Do you want to change contact? yes/no"
-  #answer = gets.chomp
-  #if answer == 'yes'
+    customer_input = gets.chomp
+    @contacts.each { |contact| puts contact.display_values if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
+    @contacts.each {|contact| @contacts.delete(contact) if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)}
+    #puts "Do you want to change contact? yes/no"
+    #answer = gets.chomp
+    #if answer == 'yes'
     puts "Enter new first name"
       first_name = gets.chomp
     puts "Enter new last name"
@@ -41,23 +37,9 @@ class Rolodex #just for dev
     contact = Contact.new(first_name, last_name, e_mail, notes)
     Rolodex.adding_contact(contact)
   
-  #end
-
-  
-  
-
-
-
-
+    #end
   end
  
-
-
-
-
-
-
-
   def self.display_all_contact
       @contacts.each do |contact| contact.display_values
     end
@@ -74,12 +56,12 @@ class Rolodex #just for dev
   end
   
 
-  def self.delete_contact ()
+  def self.delete_contact 
     customer_input = gets.chomp
     case customer_input
     when 
       @contacts.each do |contact| @contacts.delete(contact) if customer_input == (contact.first_name || contact.last_name || contact.e_mail || contact.notes)
-      puts "Your contact #{contact.first_name} #{contact.last_name} has been deleted"
+      puts "Your contact #{contact.first_name.capitalize} #{contact.last_name.capitalize} has been deleted"
       puts "Returning to main menu"
       puts " "
       end
